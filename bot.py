@@ -209,8 +209,8 @@ async def on_message(message):
                         atk = atk + 1
                         hit = hit + 20
                     elif triangle(defender_weapon[1], attacker_weapon[1]) == "disadvantage":
-                        atk = atk + 1
-                        hit = hit + 20
+                        atk = atk - 1
+                        hit = hit - 20
                     if atk < 0:
                         atk = 0
                     if hit < 0:
