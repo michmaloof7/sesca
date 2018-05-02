@@ -6,9 +6,11 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 Client = discord.Client()
 client = commands.Bot(command_prefix="Sesca, ")
+current_channel = ""
+currently_chatting = False
 
 
-def triangle(attack,defend):
+def triangle(attack, defend):
     return "advantage" if (attack == "Sword" and defend == "Axe") else\
            "advantage" if (attack == "Axe" and defend == "Lance") else\
            "advantage" if (attack == "Lance" and defend == "Sword") else\
@@ -40,6 +42,7 @@ def triangle(attack,defend):
 
 @client.event
 async def on_ready():
+    global current_channel
     print("Bot is ready!")
 
 
@@ -52,6 +55,25 @@ async def on_message(message):
     if message.content.upper().startswith("S!SAY"):
         args = message.content.split(" ")
         await client.send_message(message.channel, "%s" % (" ".join(args[1:])))
+
+    if message.content.upper().startswith("S!OPENCHAT"):
+        global current_channel
+        global currently_chatting
+        if not currently_chatting:
+            currently_chatting = True
+            current_channel = message.channel
+            print("speaking in " + str(current_channel))
+            await client.send_message(current_channel, "Yes?")
+            while True:
+                full_message = input()
+                if full_message == "s!exit":
+                    currently_chatting = False
+                    break
+                else:
+                    await client.send_message(current_channel, "%s" % full_message)
+        else:
+            await client.send_message(message.channel, """Sorry, I'm chatting somewhere else right now... I'll finish
+             up over and get right to you!""")
 
     if message.content.upper().startswith("S!SHEET"):
         scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
