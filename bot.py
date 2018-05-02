@@ -270,6 +270,7 @@ async def on_message(message):
                         full_message = weapon + " doesn't seem to be a weapon in my database..."
                 break
             counter = counter + 1
+        await client.send_message(message.channel, "%s" % full_message)
 
-            
+
 client.run("NDI2MTM1NjM5Mjk4NDA4NDUw.DZWGJg.WbYOBpinNIJpqRM2HFgN2L_KdTE")
