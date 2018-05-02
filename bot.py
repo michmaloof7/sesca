@@ -257,7 +257,7 @@ async def on_message(message):
                             full_message = name + " already has their " + weapon + " equipped..."
                             break
                         else:
-                            for k in range(32,35):
+                            for k in range(32, 36):
                                 if stats[k] == weapon:
                                     datasheet.update_cell(k+1, counter, stats[31])
                                     datasheet.update_cell(32, counter, weapon)
