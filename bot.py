@@ -234,4 +234,43 @@ async def on_message(message):
                 full_message = attacker + " doesn't seem to have a weapon equipped..."
         await client.send_message(message.channel, "%s" % full_message)
 
+    if message.content.upper().startswith("S!EQUIP"):
+        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+        sheet_credentials = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+        google_client = gspread.authorize(sheet_credentials)
+        args = message.content.split(" ")
+        name = args[1]
+        weapon = " ".join(args[2:])
+        sheet = google_client.open("SESCA Database")
+        datasheet = sheet.get_worksheet(0)
+        weaponsheet = sheet.get_worksheet(1)
+        name_list = datasheet.row_values(1)
+        weapon_list = weaponsheet.row_values(1)
+        counter = 1
+        full_message = "Who is " + name + "? They aren't in my database..."
+        for i in name_list:
+            if i == name:
+                stats = datasheet.col_values(counter)
+                for j in weapon_list:
+                    if j == weapon:
+                        if stats[31] == weapon:
+                            full_message = name + " already has their " + weapon + " equipped..."
+                            break
+                        else:
+                            for k in range(32, 36):
+                                if stats[k] == weapon:
+                                    datasheet.update_cell(k+1, counter, stats[31])
+                                    datasheet.update_cell(32, counter, weapon)
+                                    full_message = name + " now has their " + weapon + " equipped!"
+                                    break
+                                else:
+                                    full_message = name + " doesn't have that in their inventory..."
+                        break
+                    else:
+                        full_message = weapon + " doesn't seem to be a weapon in my database..."
+                break
+            counter = counter + 1
+        await client.send_message(message.channel, "%s" % full_message)
+
+
 client.run("NDI2MTM1NjM5Mjk4NDA4NDUw.DZWGJg.WbYOBpinNIJpqRM2HFgN2L_KdTE")
