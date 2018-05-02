@@ -250,7 +250,7 @@ async def on_message(message):
         full_message = "Who is " + name + "? They aren't in my database..."
         for i in name_list:
             if i == name:
-                stats = sheet.col_values(counter)
+                stats = datasheet.col_values(counter)
                 for j in weapon_list:
                     if j == weapon:
                         if stats[31] == weapon:
