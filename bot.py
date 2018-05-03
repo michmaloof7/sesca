@@ -180,7 +180,7 @@ async def on_message(message):
                 if attacker_weapon[1] == "Bow" and (defender_stats[5] == "Wyvern Rider" or defender_stats[5] == \
                                                     "Pegasus Rider" or defender_stats[6] == "Wyvern Rider" or \
                                                     defender_stats[6] == "Pegasus Rider"):
-                    attacker_weapon[2] = attacker_weapon[2] * 2
+                    attacker_weapon[2] = str(int(attacker_weapon[2]) * 2)
                 if int(attacker_stats[20]) - int(attacker_weapon[4]) < 0:
                     eff_spd_atk = int(attacker_stats[16]) + (int(attacker_stats[20]) - int(attacker_weapon[4]))
                 else:
@@ -230,7 +230,7 @@ async def on_message(message):
                     if defender_weapon[1] == "Bow" and (attacker_stats[5] == "Wyvern Rider" or attacker_stats[5] == \
                                                         "Pegasus Rider" or attacker_stats[6] == "Wyvern Rider" or \
                                                         attacker_stats[6] == "Pegasus Rider"):
-                        defender_weapon[2] = defender_weapon[2] * 2
+                        defender_weapon[2] = str(int(defender_weapon[2]) * 2)
                     if defender_weapon[1] == "Sword" or defender_weapon[1] == "Lance" or defender_weapon[1] == "Axe" \
                             or defender_weapon[1] == "Bow" or defender_weapon[1] == "Dagger":
                         atk = int(defender_stats[13]) + int(defender_weapon[2]) - int(attacker_stats[18])
