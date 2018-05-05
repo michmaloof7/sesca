@@ -260,7 +260,7 @@ async def on_message(message):
                     full_message += "\n**Chance to Critically Strike:** " + str(int(crit)) + "%"
                     if eff_spd_def - eff_spd_atk >= 5:
                         full_message += "\n" + defender + " has enough speed to attack twice"
-                full_message += "\nSpeed Difference: " + (eff_spd_atk - eff_spd_def)
+                full_message += "\nSpeed Difference: " + str(eff_spd_atk - eff_spd_def)
             else:
                 full_message = attacker + " doesn't seem to have a weapon equipped..."
         await client.send_message(message.channel, "%s" % full_message)
