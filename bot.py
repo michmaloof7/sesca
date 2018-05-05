@@ -304,4 +304,4 @@ async def on_message(message):
                 counter = counter + 1
             await client.send_message(message.channel, "%s" % full_message)
 
-    client.run("NDI2MTM1NjM5Mjk4NDA4NDUw.DZWGJg.WbYOBpinNIJpqRM2HFgN2L_KdTE")
+    client.run("NDI2MTM1NjM5Mjk4NDA4NDUw.Dc6hww.W34TBs8_dBkR0L_4Fq9FeMGrvVA")
