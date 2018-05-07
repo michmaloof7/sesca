@@ -213,10 +213,6 @@ async def on_message(message):
                     hit = 0
                 if crit < 0:
                     crit = 0
-                if hit > 100:
-                    hit = 100
-                if crit > 100:
-                    crit = 100
                 full_message = "__**Battle Forecast for " + attacker + " vs " + defender + "**__"
                 full_message += "\n\n**" + attacker + " initiates with " + attacker_weapon[0] + "**"
                 full_message += "\n**Damage Dealt:** " + str(atk)
@@ -252,10 +248,6 @@ async def on_message(message):
                          hit = 0
                     if crit < 0:
                         crit = 0
-                    if hit > 100:
-                        hit = 100
-                    if crit > 100:
-                        crit = 100
                     full_message += "\n**Damage Dealt:** " + str(atk)
                     full_message += "\n**Chance to Hit:** " + str(int(hit)) + "%"
                     full_message += "\n**Chance to Critically Strike:** " + str(int(crit)) + "%"
