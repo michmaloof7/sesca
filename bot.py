@@ -215,6 +215,10 @@ async def on_message(message):
                     crit = 0
                 full_message = "__**Battle Forecast for " + attacker + " vs " + defender + "**__"
                 full_message += "\n\n**" + attacker + " initiates with " + attacker_weapon[0] + "**"
+                if attacker_weapon[1] == "Bow" and (defender_stats[5] == "Wyvern Rider" or defender_stats[5] ==
+                                                    "Pegasus Rider" or defender_stats[6] == "Wyvern Rider" or
+                                                    defender_stats[6] == "Pegasus Rider"):
+                    full_message += "\n*Weapon Mt x2: Bows vs Fliers!!!*"
                 full_message += "\n**Damage Dealt:** " + str(atk)
                 full_message += "\n**Chance to Hit:** " + str(int(hit)) + "%"
                 full_message += "\n**Chance to Critically Strike:** " + str(int(crit)) + "%"
@@ -227,6 +231,7 @@ async def on_message(message):
                                                         "Pegasus Rider" or attacker_stats[6] == "Wyvern Rider" or
                                                         attacker_stats[6] == "Pegasus Rider"):
                         defender_weapon[2] = str(int(defender_weapon[2]) * 2)
+                        full_message += "\n*Weapon Mt x2: Bows vs Fliers!!!*"
                     if defender_weapon[1] == "Sword" or defender_weapon[1] == "Lance" or defender_weapon[1] == \
                             "Axe" or defender_weapon[1] == "Bow" or defender_weapon[1] == "Dagger":
                         atk = int(defender_stats[13]) + int(defender_weapon[2]) - int(attacker_stats[18])
@@ -256,7 +261,7 @@ async def on_message(message):
             else:
                 full_message = attacker + " doesn't seem to have a weapon equipped..."
         await client.send_message(message.channel, "%s" % full_message)
-
+        
     if message.content.upper().startswith("S!EQUIP"):
         scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
         sheet_credentials = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
